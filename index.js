@@ -72,7 +72,7 @@ module.exports = () => {
              const spinner = ora().start();
 
              db.on('error', console.error.bind(console, 'connection error:'));
-               //lOGIN QUERY
+               // search for the user 
                dbCommands.findUser(User,loginUn,loginPw,function(user){
                   if(user) {
                       spinner.stop();
@@ -82,7 +82,6 @@ module.exports = () => {
                      cli.init()
                 }
                 else {
-                    terminalStyle.horizontalLine()
                     console.log("Authentication Failed");
                     process.exit(1)
                   }
@@ -144,12 +143,10 @@ module.exports = () => {
     if(str){
 
       var uniqueInputs = [
-
         'help',
         'logs',
         'convert',
         'symbols'
-
       ];
 
       // verfiy the user is sending valid input
@@ -174,7 +171,6 @@ module.exports = () => {
 
   // handle the 'help' event
   e.on('help',function(str){
-
     require('./cmds/help')(str)
   });
 
@@ -187,15 +183,11 @@ module.exports = () => {
       dbCommands.findUser(User,dbCommands.loginUserName,dbCommands.loginPassword,function(user){
 
         if(user) {
-
             spinner.stop()
             require('./cmds/showLogs')(dbCommands.loginUserName)
-
         }
         else {
-
           console.log("You are not authenticated");
-
         }
       })
     })
@@ -211,7 +203,9 @@ module.exports = () => {
     if(homeCurrency && exchangeCurrency && amount !== false){
       dbCommands.connectDb(function(db){
         db.on('error', console.error.bind(console, 'connection error:'));
+        if(db){
           require('./cmds/convert')(homeCurrency,exchangeCurrency,amount,dbCommands.loginUserName)
+        }
       })
    
     } else {
