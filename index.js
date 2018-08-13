@@ -209,9 +209,11 @@ module.exports = () => {
     var amount = typeof(arr[3]) == 'string' && arr[1].trim().length > 0 ? arr[3].trim() : false;
 
     if(homeCurrency && exchangeCurrency && amount !== false){
-      // (homeCurrency !== false) && (exchangeCurrency !== false) && (amount !== false)
-      require('./cmds/convert')(homeCurrency,exchangeCurrency,amount,dbCommands.loginUserName)
-
+      dbCommands.connectDb(function(db){
+        db.on('error', console.error.bind(console, 'connection error:'));
+          require('./cmds/convert')(homeCurrency,exchangeCurrency,amount,dbCommands.loginUserName)
+      })
+   
     } else {
       console.log("Currecnies must be of the format 'USD' or 'EUR' and make sure to include an amount");
     }
