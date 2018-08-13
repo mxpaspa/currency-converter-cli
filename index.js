@@ -8,7 +8,6 @@ const prompt = require('prompt')
 const User = require('./models/userModel')
 const ora = require('ora')
 const dbCommands = require('./cmds/db');
-// const terminalStyle = require('./utils/terminalStyle')
 
 module.exports = () => {
 
