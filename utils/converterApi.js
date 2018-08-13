@@ -6,7 +6,7 @@ module.exports = async (from,to,amount) => {
 
   // define the mlab database url
   var mongoose = require('mongoose');
-  var uri = 'mongodb://paspam:convertercli12@ds117422.mlab.com:17422/converter-cli';
+  var uri = '[mlabUrl]/converter-cli';
 
   // define a timeout (required for mlab)
   var options = {
