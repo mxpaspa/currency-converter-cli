@@ -2,8 +2,6 @@ const ora = require('ora')
 const getConversion = require('../utils/converterApi')
 const Log = require('../models/conversionHistoryModel')
 const User = require('../models/userModel')
-// const dbCommands = require('./db')
-
 
 module.exports = async (homeCurrency,exchangeCurrency,amount,loginUserName) => {
   const spinner = ora().start()
@@ -11,8 +9,6 @@ module.exports = async (homeCurrency,exchangeCurrency,amount,loginUserName) => {
   try {
 
     const conversion = await getConversion(homeCurrency,exchangeCurrency,amount)
-    // const weather = await getWeather(location)
-
     spinner.stop()
 
     // creat a logFile from the Log schema after a conversion is returned
@@ -41,10 +37,8 @@ module.exports = async (homeCurrency,exchangeCurrency,amount,loginUserName) => {
     logFile.save()
 
     User.findOne({username : loginUserName}).then(function(record){
-
       record.logFiles.push(logFile);
       record.save();
-
 
     });
 
