@@ -1,6 +1,6 @@
 # converter-cli
 
-A CLI application that makes real-time currency conversions
+A Node CLI application that makes real-time currency conversions
 
 ## Installation using :package: npm
 
